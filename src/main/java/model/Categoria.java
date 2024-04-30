@@ -22,6 +22,10 @@ public class Categoria {
     public Categoria() {
     }
 
+    public Categoria(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

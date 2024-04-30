@@ -1,11 +1,12 @@
 package model;
+
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "actor")
 public class Actor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
@@ -22,14 +23,16 @@ public class Actor {
 
     // Constructors, getters and setters
 
-    public Actor() {}
+    public Actor() {
+    }
+
+    public Actor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public int getActorId() {
         return actorId;
-    }
-
-    public void setActorId(int actorId) {
-        this.actorId = actorId;
     }
 
     public String getFirstName() {
@@ -50,10 +53,6 @@ public class Actor {
 
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 }
 

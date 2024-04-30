@@ -25,6 +25,10 @@ public class Pais {
     public Pais() {
     }
 
+    public Pais(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,6 +39,10 @@ public class Pais {
 
     public int getId() {
         return id;
+    }
+
+    public List<Ciudad> getCiudades() {
+        return ciudades;
     }
 
     public LocalDateTime getLastUpdate() {
