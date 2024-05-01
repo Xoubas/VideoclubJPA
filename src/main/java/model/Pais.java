@@ -11,16 +11,17 @@ public class Pais {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "country", length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "pais")
-    private List<Ciudad> ciudades;
-
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    // Relations
+    @OneToMany(mappedBy = "pais")
+    private List<Ciudad> ciudades;
 
     public Pais() {
     }
@@ -37,7 +38,7 @@ public class Pais {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

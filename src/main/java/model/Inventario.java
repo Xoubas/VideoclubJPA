@@ -11,14 +11,18 @@ public class Inventario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id", nullable = false)
     private Integer id;
-    @OneToMany
+
+    @Column(name = "last_update", nullable = false)
+    private LocalDateTime lastUpdate;
+
+    // Relations
+    @ManyToOne
+    @JoinColumn(name = "film_id", nullable = false)
     private Pelicula pelicula;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Tienda tienda;
-    @Column(name = "last_update", nullable = false)
-    private LocalDateTime lastUpdate;
 
     public Inventario() {
     }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -12,10 +13,6 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false)
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Tienda tienda;
 
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;
@@ -26,10 +23,7 @@ public class Cliente {
     @Column(length = 50)
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private Direccion direccion;
-
+    @Column
     private boolean activebool;
 
     @Column(name = "create_date", nullable = false)
@@ -40,6 +34,19 @@ public class Cliente {
 
     @Column(nullable = false)
     private boolean active;
+
+    //    Relations
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Tienda tienda;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Direccion direccion;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pago> pagos;
+
 
     public Cliente() {
     }

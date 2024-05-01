@@ -3,6 +3,7 @@ package model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "staff")
@@ -18,14 +19,6 @@ public class Empleado {
     @Column(name = "last_name", length = 45, nullable = false)
     private String lastName;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private Direccion direccion;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Tienda tienda;
-
     @Column(length = 50, nullable = false)
     private String email;
 
@@ -40,6 +33,21 @@ public class Empleado {
 
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
+
+    // Relations
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Direccion direccion;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Tienda tienda;
+
+    @OneToMany(mappedBy = "empleado")
+    private List<Alquiler> alquileres;
+
+    @OneToMany(mappedBy = "empleado")
+    private List<Pago> pagos;
 
     public Empleado() {
     }

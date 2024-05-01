@@ -3,6 +3,7 @@ package model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "language")
@@ -10,7 +11,7 @@ public class Idioma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "language_id")
-    private int languageId;
+    private Integer languageId;
 
     @Column(length = 20, nullable = false)
     private String name;
@@ -18,7 +19,9 @@ public class Idioma {
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 
-    // Constructors, getters and setters
+    // Relations
+    @OneToMany
+    private List<Pelicula> peliculas;
 
     public Idioma() {
     }
@@ -27,7 +30,7 @@ public class Idioma {
         this.name = name;
     }
 
-    public int getLanguageId() {
+    public Integer getLanguageId() {
         return languageId;
     }
 

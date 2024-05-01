@@ -3,6 +3,7 @@ package model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 
@@ -11,13 +12,17 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private int categoryId;
+    private Integer categoryId;
 
     @Column(length = 25)
     private String name;
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    //Relations
+    @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
+    private List<Pelicula> peliculas;
 
     public Categoria() {
     }
@@ -34,7 +39,7 @@ public class Categoria {
         this.name = name;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 

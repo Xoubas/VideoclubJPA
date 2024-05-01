@@ -14,7 +14,7 @@ import java.util.Map;
 public class JPAUtil {
 
     public static final String LEXISLACIONMARIADB = "lexislacionmariadb";
-    public static final String VIDEOCLUBPOSTGRESQL = "VideoClub";
+    public static final String VIDEOCLUBPOSTGRESQL = "videoclub";
 
     private static final Map<String, EntityManagerFactory> emFactories = new HashMap<>() ;
 
@@ -44,7 +44,6 @@ public class JPAUtil {
 
     public static EntityManager getEntityManager(String persistenceUnitName) {
         return getEmFactory(persistenceUnitName).createEntityManager();
-
     }
 
 

@@ -22,13 +22,6 @@ public class Direccion {
     @Column(length = 20, nullable = false)
     private String district;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private Ciudad city;
-
-    @OneToMany(mappedBy = "direccion")
-    private List<Empleado> empleados;
-
     @Column(name = "postal_code", length = 10)
     private String postalCode;
 
@@ -38,6 +31,13 @@ public class Direccion {
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 
+    // Relations
+    @OneToMany(mappedBy = "direccion")
+    private List<Empleado> empleados;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private Ciudad city;
     public Direccion() {
     }
 

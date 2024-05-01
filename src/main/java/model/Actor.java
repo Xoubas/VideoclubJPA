@@ -3,6 +3,7 @@ package model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "actor")
@@ -10,7 +11,7 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
-    private int actorId;
+    private Integer actorId;
 
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;
@@ -21,7 +22,9 @@ public class Actor {
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 
-    // Constructors, getters and setters
+    //    Relations
+    @ManyToMany(mappedBy = "actores", fetch = FetchType.LAZY)
+    private List<Pelicula> peliculas;
 
     public Actor() {
     }
@@ -31,7 +34,7 @@ public class Actor {
         this.lastName = lastName;
     }
 
-    public int getActorId() {
+    public Integer getActorId() {
         return actorId;
     }
 

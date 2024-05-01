@@ -24,10 +24,6 @@ public class Pelicula {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @ManyToOne
-    @JoinColumn(name = "language_id", nullable = false)
-    private Idioma idioma;
-
     @Column(name = "rental_duration", nullable = false)
     private Short rentalDuration;
 
@@ -47,116 +43,34 @@ public class Pelicula {
     @Column(name = "last_update", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private LocalDateTime lastUpdate;
 
-    @Type(type = "list-array")
-    @Column(name = "special_features", columnDefinition = "text[]")
-    private List<String> specialFeatures;
+    @Column(name = "special_features")
+    private String[] specialFeatures;
 
-    @Column(name = "fulltext", nullable = false, columnDefinition = "TSVECTOR")
+    //Type tsVector
+    @Column(name = "fulltext", nullable = false)
     private String fulltext;
 
-    // Getters and setters
+    //Relations
+    @ManyToOne
+    @JoinColumn(name = "language_id", nullable = false)
+    private Idioma idioma;
 
-    public Integer getFilmId() {
-        return filmId;
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Categoria> categorias;
 
-    public void setFilmId(Integer filmId) {
-        this.filmId = filmId;
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actores;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
-    public Short getRentalDuration() {
-        return rentalDuration;
-    }
-
-    public void setRentalDuration(Short rentalDuration) {
-        this.rentalDuration = rentalDuration;
-    }
-
-    public BigDecimal getRentalRate() {
-        return rentalRate;
-    }
-
-    public void setRentalRate(BigDecimal rentalRate) {
-        this.rentalRate = rentalRate;
-    }
-
-    public Short getLength() {
-        return length;
-    }
-
-    public void setLength(Short length) {
-        this.length = length;
-    }
-
-    public BigDecimal getReplacementCost() {
-        return replacementCost;
-    }
-
-    public void setReplacementCost(BigDecimal replacementCost) {
-        this.replacementCost = replacementCost;
-    }
-
-    public MpaaRating getRating() {
-        return rating;
-    }
-
-    public void setRating(MpaaRating rating) {
-        this.rating = rating;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public List<String> getSpecialFeatures() {
-        return specialFeatures;
-    }
-
-    public void setSpecialFeatures(List<String> specialFeatures) {
-        this.specialFeatures = specialFeatures;
-    }
-
-    public String getFulltext() {
-        return fulltext;
-    }
-
-    public void setFulltext(String fulltext) {
-        this.fulltext = fulltext;
-    }
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Inventario> inventarios;
 }
